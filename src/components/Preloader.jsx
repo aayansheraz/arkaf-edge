@@ -79,74 +79,62 @@ export const Preloader = ({ onComplete }) => {
       const timeout = setTimeout(() => {
         setIsDone(true);
         if (onComplete) onComplete();
-      }, 500);
+      }, 600);
       return () => clearTimeout(timeout);
     }
   }, [progress, onComplete]);
 
   if (isDone) return null;
 
+  // Format 2 or 3 digit count (e.g. 00 -> 100)
+  const formattedCount = progress < 10 ? `0${progress}` : `${progress}`;
+
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 0.98 }}
-      transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-      className="fixed inset-0 z-[99999] bg-[#080d0b] text-white flex flex-col justify-between items-center py-16 px-6 select-none"
-    >
-      {/* Top Spacer */}
-      <div />
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 1 }}
+        exit={{
+          y: "-100%",
+          transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+        }}
+        className="fixed inset-0 z-[99999] bg-[#080d0b] text-white flex flex-col justify-between p-8 sm:p-14 lg:p-20 select-none overflow-hidden"
+      >
+        {/* Subtle Cinematic Background Radial Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] bg-caribbean-green/10 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Center Facebook/Meta-Style Intro Branding & 0-100 Loading */}
-      <div className="flex flex-col items-center justify-center space-y-8 max-w-sm w-full">
-        {/* Glowing Brand Icon Emblem */}
-        <motion.div
-          animate={{ scale: [1, 1.05, 1], opacity: [0.85, 1, 0.85] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="relative flex items-center justify-center"
-        >
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#0B0F0E] border-2 border-caribbean-green/40 flex items-center justify-center shadow-[0_0_40px_rgba(0,223,129,0.3)]">
-            <span className="font-heading font-black text-4xl sm:text-5xl text-caribbean-green drop-shadow-[0_0_15px_#00DF81]">
-              A
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Brand Name */}
-        <div className="text-center space-y-1.5">
-          <h1 className="font-heading font-black text-3xl sm:text-4xl uppercase tracking-tight text-white">
-            ARKAF <span className="text-caribbean-green">EDGE.</span>
-          </h1>
-          <p className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] text-pistachio/70 font-semibold">
-            Strategy • Creativity • Impact
-          </p>
+        {/* Top Header Row: Counter */}
+        <div className="relative z-10 flex justify-between items-baseline w-full">
+          <span className="font-mono text-xs text-caribbean-green uppercase tracking-[0.3em] font-bold">
+            LOADING
+          </span>
+          <span className="font-mono text-4xl sm:text-6xl md:text-7xl font-black tabular-nums text-caribbean-green drop-shadow-[0_0_25px_rgba(0,223,129,0.5)]">
+            {formattedCount}%
+          </span>
         </div>
 
-        {/* Minimalist 0 to 100 Counter & Progress Bar */}
-        <div className="w-full max-w-[240px] space-y-2 pt-4">
-          <div className="flex justify-between items-center font-mono text-xs">
-            <span className="text-pistachio/60 tracking-wider uppercase text-[10px]">Loading Experience</span>
-            <span className="text-caribbean-green font-bold text-sm tracking-wider">{progress}%</span>
-          </div>
+        {/* Center: Giant Cinematic Typography */}
+        <div className="relative z-10 w-full flex flex-col items-center justify-center text-center my-auto">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-6xl sm:text-8xl md:text-9xl lg:text-[13vw] font-black uppercase font-heading tracking-tighter leading-[0.88] text-white select-none"
+          >
+            ARKAF <span className="text-caribbean-green drop-shadow-[0_0_35px_rgba(0,223,129,0.45)]">EDGE.</span>
+          </motion.h1>
+        </div>
 
-          <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+        {/* Bottom Minimalist Progress Bar */}
+        <div className="relative z-10 w-full">
+          <div className="w-full h-[3px] bg-white/10 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-caribbean-green rounded-full shadow-[0_0_10px_#00DF81]"
+              className="h-full bg-caribbean-green rounded-full shadow-[0_0_15px_#00DF81]"
               style={{ width: `${progress}%` }}
               transition={{ ease: "easeOut", duration: 0.1 }}
             />
           </div>
         </div>
-      </div>
-
-      {/* Bottom Classic Facebook/Meta-Style 'from ARKAF' Tag */}
-      <div className="flex flex-col items-center justify-center space-y-1">
-        <span className="font-mono text-[11px] uppercase tracking-widest text-pistachio/50">
-          from
-        </span>
-        <span className="font-heading font-black text-sm tracking-[0.35em] text-white/90 uppercase drop-shadow-[0_0_10px_rgba(0,223,129,0.3)]">
-          ARKAF
-        </span>
-      </div>
-    </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
