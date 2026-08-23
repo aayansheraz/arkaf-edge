@@ -354,16 +354,16 @@ const StepPreviewCard = ({ step, index, scrollYProgress }) => {
   return (
     <motion.div
       style={{ y, opacity }}
-      className={`absolute z-20 top-1/2 -translate-y-1/2 w-[75%] sm:w-[280px] md:w-[320px] lg:w-[350px] pointer-events-auto ${
-        isLeft ? "left-3 sm:left-6 lg:left-10 right-auto text-left" : "right-3 sm:right-6 lg:right-10 left-auto text-left"
+      className={`absolute z-20 top-[62%] sm:top-[60%] md:top-1/2 md:-translate-y-1/2 left-4 right-4 sm:left-8 sm:right-8 md:inset-auto w-auto md:w-[320px] lg:w-[350px] pointer-events-auto text-center md:text-left ${
+        isLeft ? "md:left-6 lg:left-10 md:right-auto" : "md:right-6 lg:right-10 md:left-auto"
       }`}
     >
-      <div>
-        <h3 className="text-xl sm:text-2xl font-bold font-sans text-white mb-2 leading-snug tracking-tight">
+      <div className="max-w-md mx-auto md:max-w-none">
+        <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-sans text-white mb-1.5 md:mb-2 leading-snug tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
           {step.headline}
         </h3>
 
-        <p className="text-pistachio/90 font-light text-sm sm:text-base leading-relaxed font-sans">
+        <p className="text-pistachio/90 font-light text-xs sm:text-sm md:text-base leading-relaxed font-sans drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
           {step.desc}
         </p>
       </div>
@@ -371,7 +371,7 @@ const StepPreviewCard = ({ step, index, scrollYProgress }) => {
   );
 };
 
-export const OurApproach = () => {
+export const ArkafFlowImpact = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -405,7 +405,7 @@ export const OurApproach = () => {
           </div>
 
           <div className="relative h-full w-full flex items-center justify-center z-10 px-4">
-            <div className="flex flex-col items-center justify-center text-center z-10 select-none max-w-[340px] sm:max-w-[400px] md:max-w-[440px] mx-auto pointer-events-none">
+            <div className="flex flex-col items-center justify-center text-center z-10 select-none max-w-[340px] sm:max-w-[400px] md:max-w-[440px] mx-auto pointer-events-none -translate-y-8 sm:-translate-y-6 md:translate-y-0">
               {approachSteps.map((step, index) => (
                 <WordTransition
                   key={step.id}
@@ -415,9 +415,9 @@ export const OurApproach = () => {
                 />
               ))}
 
-              <div className="mt-8 font-sans text-base sm:text-lg md:text-xl text-pistachio font-light tracking-wide flex items-center justify-center gap-2">
+              <div className="mt-6 md:mt-8 font-sans text-sm sm:text-base md:text-xl text-pistachio font-light tracking-wide flex items-center justify-center gap-2">
                 <span>Each essential. Each in</span>
-                <span className="inline-block px-3.5 py-0.5 rounded-full border border-caribbean-green/40 text-caribbean-green font-medium text-sm shadow-[0_0_15px_rgba(0,223,129,0.2)] bg-rich-black/60 backdrop-blur-md">
+                <span className="inline-block px-3.5 py-0.5 rounded-full border border-caribbean-green/40 text-caribbean-green font-medium text-xs sm:text-sm shadow-[0_0_15px_rgba(0,223,129,0.2)] bg-rich-black/60 backdrop-blur-md">
                   motion.
                 </span>
               </div>
@@ -436,110 +436,38 @@ export const OurApproach = () => {
       </div>
 
       {/* 07. IMPACT & NUMBERS */}
-      <div className="relative z-20 w-full bg-[#F1F7F6] text-[#0B0F0E] border-t border-[#E2E8E6] py-44 px-6 md:px-20">
-        <style dangerouslySetInnerHTML={{ __html: `
-          .uiverse-stack {
-            width: 100%;
-            max-width: 270px;
-            transition: 0.25s ease;
-            cursor: pointer;
-          }
-          .uiverse-stack:hover {
-            transform: rotate(5deg);
-          }
-          .uiverse-stack:hover .uiverse-card:before {
-            transform: translateY(-2%) rotate(-4deg);
-          }
-          .uiverse-stack:hover .uiverse-card:after {
-            transform: translateY(2%) rotate(4deg);
-          }
-          .uiverse-card {
-            aspect-ratio: 1 / 1.18;
-            border: 4px solid #000;
-            background-color: #fff;
-            position: relative;
-            transition: 0.15s ease;
-            cursor: pointer;
-            padding: 5% 5% 15% 5%;
-            box-sizing: border-box;
-          }
-          .uiverse-card:before,
-          .uiverse-card:after {
-            content: "";
-            display: block;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            border: 4px solid #000;
-            background-color: #fff;
-            transform-origin: center center;
-            z-index: -1;
-            transition: 0.15s ease;
-            top: 0;
-            left: 0;
-            box-sizing: border-box;
-          }
-          .uiverse-card:before {
-            transform: translateY(-2%) rotate(-6deg);
-          }
-          .uiverse-card:after {
-            transform: translateY(2%) rotate(6deg);
-          }
-          .uiverse-image {
-            width: 100%;
-            border: 4px solid #000;
-            background-color: #080d0b;
-            aspect-ratio: 1 / 1;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            padding: 0.75rem;
-          }
-        ` }} />
+      <div className="relative z-20 py-44 px-6 md:px-20 max-w-7xl mx-auto border-t border-forest/20 bg-rich-black">
+        <div className="text-center mb-24">
+          <span className="font-mono text-xs text-caribbean-green uppercase tracking-[0.3em] block mb-3 font-bold">
+            07. IMPACT & NUMBERS
+          </span>
+          <h3 className="text-4xl md:text-6xl font-black uppercase font-heading text-white">
+            Measured by <span className="text-caribbean-green drop-shadow-[0_0_20px_rgba(0,223,129,0.4)]">Results.</span>
+          </h3>
+        </div>
 
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
-            <span className="font-mono text-xs text-[#00B368] uppercase tracking-[0.3em] block mb-3 font-bold">
-              07. IMPACT & NUMBERS
-            </span>
-            <h3 className="text-4xl md:text-6xl font-black uppercase font-heading text-[#0B0F0E] tracking-tight">
-              Measured by <span className="text-[#00DF81] drop-shadow-[0_0_20px_rgba(0,223,129,0.35)]">Results.</span>
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((item, index) => (
             <motion.div
               key={item.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="w-full flex justify-center py-6"
+              className="p-8 rounded-3xl bg-[#032221] border border-caribbean-green/20 text-center hover:border-caribbean-green/60 transition-colors shadow-[0_15px_35px_rgba(3,34,33,0.6)]"
             >
-              {/* Stack Wrapper (.stack) */}
-              <div className="uiverse-stack">
-                {/* Polaroid Stacked Card (.card) */}
-                <div className="uiverse-card">
-                  {/* Inner Content Area (.image) */}
-                  <div className="uiverse-image">
-                    <div className="text-4xl sm:text-5xl font-black text-caribbean-green font-heading mb-1.5 drop-shadow-[0_0_15px_rgba(0,223,129,0.5)]">
-                      {item.value}
-                    </div>
-                    <div className="font-mono text-[10px] sm:text-[11px] font-bold uppercase text-white tracking-wider text-center leading-tight">
-                      {item.label}
-                    </div>
-                  </div>
-                </div>
+              <div className="text-5xl md:text-7xl font-black text-caribbean-green font-heading mb-2 drop-shadow-[0_0_15px_rgba(0,223,129,0.3)]">
+                {item.value}
+              </div>
+              <div className="font-mono text-xs uppercase text-pistachio/90 font-medium tracking-wider">
+                {item.label}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
     </div>
-  </div>
   );
 };
+
+export const OurApproach = ArkafFlowImpact;

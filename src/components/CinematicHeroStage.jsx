@@ -419,12 +419,38 @@ export const CinematicHeroStage = ({ onNavigate }) => {
         vOp = 0;
       }
 
+      const isMobile = window.innerWidth < 768;
       const sOps = [0, 0, 0, 0];
-      if (currentProgress > 0.26) {
-        sOps[0] = clamp((currentProgress - 0.28) / 0.05, 0, 1);
-        sOps[1] = clamp((currentProgress - 0.33) / 0.05, 0, 1);
-        sOps[2] = clamp((currentProgress - 0.38) / 0.05, 0, 1);
-        sOps[3] = clamp((currentProgress - 0.43) / 0.05, 0, 1);
+      if (isMobile) {
+        // MOBILE: Reveal each of the 4 points one-by-one so they NEVER overlap
+        if (currentProgress >= 0.26 && currentProgress <= 0.33) {
+          const pIn = clamp((currentProgress - 0.26) / 0.025, 0, 1);
+          const pOut = currentProgress > 0.305 ? clamp((currentProgress - 0.305) / 0.025, 0, 1) : 0;
+          sOps[0] = pIn * (1 - pOut);
+        }
+        if (currentProgress > 0.33 && currentProgress <= 0.40) {
+          const pIn = clamp((currentProgress - 0.33) / 0.025, 0, 1);
+          const pOut = currentProgress > 0.375 ? clamp((currentProgress - 0.375) / 0.025, 0, 1) : 0;
+          sOps[1] = pIn * (1 - pOut);
+        }
+        if (currentProgress > 0.40 && currentProgress <= 0.47) {
+          const pIn = clamp((currentProgress - 0.40) / 0.025, 0, 1);
+          const pOut = currentProgress > 0.445 ? clamp((currentProgress - 0.445) / 0.025, 0, 1) : 0;
+          sOps[2] = pIn * (1 - pOut);
+        }
+        if (currentProgress > 0.47 && currentProgress <= 0.54) {
+          const pIn = clamp((currentProgress - 0.47) / 0.025, 0, 1);
+          const pOut = currentProgress > 0.515 ? clamp((currentProgress - 0.515) / 0.025, 0, 1) : 0;
+          sOps[3] = pIn * (1 - pOut);
+        }
+      } else {
+        // DESKTOP: Original simultaneous accumulation across 4 quadrant positions
+        if (currentProgress > 0.26) {
+          sOps[0] = clamp((currentProgress - 0.28) / 0.05, 0, 1);
+          sOps[1] = clamp((currentProgress - 0.33) / 0.05, 0, 1);
+          sOps[2] = clamp((currentProgress - 0.38) / 0.05, 0, 1);
+          sOps[3] = clamp((currentProgress - 0.43) / 0.05, 0, 1);
+        }
       }
 
       let shY = 100;

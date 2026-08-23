@@ -90,7 +90,7 @@ export const WorkInsightsCTA = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative bg-[#0B0F0E] border border-white/10 hover:border-caribbean-green/60 rounded-3xl overflow-hidden transition-all duration-500 shadow-2xl"
+              className="group relative bg-[#032221] border border-caribbean-green/20 hover:border-caribbean-green/60 rounded-3xl overflow-hidden transition-all duration-500 shadow-2xl"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
                 <div className="lg:col-span-7 h-[400px] lg:h-[500px] relative overflow-hidden">
@@ -104,7 +104,7 @@ export const WorkInsightsCTA = () => {
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between bg-[#0B0F0E]">
+                <div className="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between bg-[#032221]">
                   <div>
                     <div className="font-mono text-xs text-caribbean-green uppercase tracking-widest font-semibold mb-3">
                       {project.category}
@@ -150,7 +150,7 @@ export const WorkInsightsCTA = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="p-8 rounded-3xl bg-[#0B0F0E] border border-white/10 hover:border-caribbean-green/40 transition-all duration-300 group cursor-none clickable shadow-2xl flex flex-col justify-between"
+              className="p-8 rounded-3xl bg-[#032221] border border-caribbean-green/20 hover:border-caribbean-green/50 transition-all duration-300 group cursor-none clickable shadow-2xl flex flex-col justify-between"
             >
               <div>
                 <div className="flex justify-between items-center font-mono text-xs text-caribbean-green mb-6">
@@ -174,7 +174,7 @@ export const WorkInsightsCTA = () => {
       </div>
 
       {/* 09. FINAL CTA */}
-      <div className="p-10 md:p-20 rounded-3xl bg-[#0B0F0E] border border-white/15 shadow-2xl relative overflow-hidden">
+      <div className="p-10 md:p-20 rounded-3xl bg-[#032221] border border-caribbean-green/25 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-caribbean-green/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -233,7 +233,7 @@ export const WorkInsightsCTA = () => {
                     required
                     type="text"
                     placeholder="Your Name"
-                    className="w-full bg-[#0B0F0E] border border-white/15 p-3.5 rounded-xl text-white focus:outline-none focus:border-caribbean-green text-sm"
+                    className="w-full bg-[#06302B] border border-caribbean-green/20 p-3.5 rounded-xl text-white focus:outline-none focus:border-caribbean-green text-sm"
                   />
                 </div>
                 <div>
@@ -244,7 +244,7 @@ export const WorkInsightsCTA = () => {
                     required
                     type="email"
                     placeholder="name@company.com"
-                    className="w-full bg-[#0B0F0E] border border-white/15 p-3.5 rounded-xl text-white focus:outline-none focus:border-caribbean-green text-sm"
+                    className="w-full bg-[#06302B] border border-caribbean-green/20 p-3.5 rounded-xl text-white focus:outline-none focus:border-caribbean-green text-sm"
                   />
                 </div>
                 <div>
@@ -255,7 +255,7 @@ export const WorkInsightsCTA = () => {
                     required
                     rows={3}
                     placeholder="Tell us about your brand goals..."
-                    className="w-full bg-[#0B0F0E] border border-white/15 p-3.5 rounded-xl text-white focus:outline-none focus:border-caribbean-green text-sm resize-none"
+                    className="w-full bg-[#06302B] border border-caribbean-green/20 p-3.5 rounded-xl text-white focus:outline-none focus:border-caribbean-green text-sm resize-none"
                   />
                 </div>
                 <button
