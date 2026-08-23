@@ -14,7 +14,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  useLenis(isMenuOpen || isLoading);
+  useLenis(isMenuOpen);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -50,13 +50,19 @@ export default function App() {
     <div className="relative min-h-screen bg-rich-black text-anti-flash-white font-sans">
       <Preloader onComplete={() => setIsLoading(false)} />
 
-      {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[3px] bg-caribbean-green origin-left z-[100] shadow-[0_0_15px_#00DF81]"
-        style={{ scaleX }}
-      />
+      {!isLoading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          {/* Scroll Progress Bar */}
+          <motion.div
+            className="fixed top-0 left-0 right-0 h-[3px] bg-caribbean-green origin-left z-[100] shadow-[0_0_15px_#00DF81]"
+            style={{ scaleX }}
+          />
 
-      <CustomCursor />
+          <CustomCursor />
 
       {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-6 pointer-events-none">
@@ -140,6 +146,8 @@ export default function App() {
 
       {/* Subtle Noise Texture */}
       <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
+        </motion.div>
+      )}
     </div>
   );
 }

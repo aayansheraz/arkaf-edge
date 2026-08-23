@@ -15,51 +15,49 @@ const criticalAssets = [
 
 export const Preloader = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState("INITIALIZING 3D ENGINE...");
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
     let loadedCount = 0;
-    const totalItems = criticalAssets.length + 3; // Images + Video + Fonts + Shaders
+    const totalItems = criticalAssets.length + 3;
 
-    const updateItemLoaded = () => {
+    const tick = () => {
       loadedCount++;
       const currentPct = Math.min(95, Math.floor((loadedCount / totalItems) * 95));
       setProgress((prev) => Math.max(prev, currentPct));
     };
 
-    // 1. Preload Fonts
+    // Preload Fonts
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(updateItemLoaded).catch(updateItemLoaded);
+      document.fonts.ready.then(tick).catch(tick);
     } else {
-      updateItemLoaded();
+      tick();
     }
 
-    // 2. Preload Video
+    // Preload Video
     const video = document.createElement("video");
     video.src = "/videos/mint_flower.mp4";
     video.preload = "auto";
     video.muted = true;
-    video.oncanplaythrough = updateItemLoaded;
-    video.onerror = updateItemLoaded;
+    video.oncanplaythrough = tick;
+    video.onerror = tick;
     video.load();
 
-    // 3. Preload High-Res Images into GPU memory
+    // Preload High-Res Images into GPU memory
     criticalAssets.forEach((src) => {
       const img = new Image();
       img.src = src;
       if (img.decode) {
-        img.decode().then(updateItemLoaded).catch(updateItemLoaded);
+        img.decode().then(tick).catch(tick);
       } else {
-        img.onload = updateItemLoaded;
-        img.onerror = updateItemLoaded;
+        img.onload = tick;
+        img.onerror = tick;
       }
     });
 
-    // 4. Three.js Engine warm up step
-    setTimeout(updateItemLoaded, 400);
+    setTimeout(tick, 300);
 
-    // Smooth timer fallback to ensure progress reaches 100%
+    // Smooth counter progression 0 -> 100
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -67,119 +65,88 @@ export const Preloader = ({ onComplete }) => {
           return 100;
         }
         if (loadedCount >= totalItems) {
-          return Math.min(100, prev + 4);
+          return Math.min(100, prev + 3);
         }
-        return Math.min(95, prev + 2);
+        return Math.min(92, prev + 2);
       });
-    }, 30);
+    }, 25);
 
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (progress < 25) {
-      setStatusText("INITIALIZING 3D SHADER ENGINE...");
-    } else if (progress < 50) {
-      setStatusText("PRELOADING CINEMATIC ASSETS...");
-    } else if (progress < 75) {
-      setStatusText("COMPILING HARDWARE COMPOSITOR...");
-    } else if (progress < 99) {
-      setStatusText("PRE-CACHING 4K MEDIA & FONTS...");
-    } else {
-      setStatusText("ARKAF EDGE EXPERIENCE READY");
-      const timer = setTimeout(() => {
-        setIsLoaded(true);
+    if (progress >= 100) {
+      const timeout = setTimeout(() => {
+        setIsDone(true);
         if (onComplete) onComplete();
-      }, 400);
-      return () => clearTimeout(timer);
+      }, 500);
+      return () => clearTimeout(timeout);
     }
   }, [progress, onComplete]);
 
+  if (isDone) return null;
+
   return (
-    <AnimatePresence>
-      {!isLoaded && (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+      className="fixed inset-0 z-[99999] bg-[#080d0b] text-white flex flex-col justify-between items-center py-16 px-6 select-none"
+    >
+      {/* Top Spacer */}
+      <div />
+
+      {/* Center Facebook/Meta-Style Intro Branding & 0-100 Loading */}
+      <div className="flex flex-col items-center justify-center space-y-8 max-w-sm w-full">
+        {/* Glowing Brand Icon Emblem */}
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{
-            y: "-100%",
-            transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] }
-          }}
-          className="fixed inset-0 z-[99999] bg-[#080d0b] text-[#F1F7F6] flex flex-col justify-between p-8 sm:p-14 select-none overflow-hidden"
+          animate={{ scale: [1, 1.05, 1], opacity: [0.85, 1, 0.85] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="relative flex items-center justify-center"
         >
-          {/* Top Brand Tag */}
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-md bg-caribbean-green flex items-center justify-center text-rich-black font-black text-sm shadow-[0_0_15px_rgba(0,223,129,0.5)] font-heading">
-                A
-              </div>
-              <span className="font-heading font-black text-lg tracking-tight uppercase">
-                ARKAF <span className="text-caribbean-green">EDGE.</span>
-              </span>
-            </div>
-
-            <div className="font-mono text-xs text-caribbean-green uppercase tracking-[0.25em] font-bold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-caribbean-green shadow-[0_0_8px_#00DF81] animate-ping" />
-              <span>DIGITAL AGENCY</span>
-            </div>
-          </div>
-
-          {/* Center Glowing Kinetic Emblem */}
-          <div className="flex flex-col items-center justify-center my-auto space-y-8">
-            <div className="relative flex items-center justify-center">
-              {/* Outer Pulsing Glow Ring */}
-              <motion.div
-                animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.7, 0.3] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute w-36 h-36 rounded-full border border-caribbean-green/30 shadow-[0_0_40px_rgba(0,223,129,0.3)]"
-              />
-
-              {/* Middle Rotating Dash Ring */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="w-28 h-28 rounded-full border border-dashed border-caribbean-green/50"
-              />
-
-              {/* Center Monogram */}
-              <div className="absolute font-heading font-black text-4xl text-white tracking-tighter drop-shadow-[0_0_20px_rgba(0,223,129,0.6)]">
-                A
-              </div>
-            </div>
-
-            {/* Micro Tagline */}
-            <div className="text-center space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-black uppercase font-heading tracking-tight text-white">
-                Strategy • <span className="text-caribbean-green">Creativity</span> • Impact
-              </h2>
-              <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-pistachio/70">
-                {statusText}
-              </p>
-            </div>
-          </div>
-
-          {/* Bottom Progress Bar & Percentage Counter */}
-          <div className="w-full max-w-xl mx-auto space-y-3">
-            <div className="flex justify-between items-baseline font-mono text-xs">
-              <span className="text-pistachio/80 tracking-widest uppercase">System Loading</span>
-              <span className="text-caribbean-green font-bold text-lg">{progress}%</span>
-            </div>
-
-            {/* Glowing Emerald Progress Track */}
-            <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden relative shadow-inner">
-              <motion.div
-                className="h-full bg-caribbean-green rounded-full shadow-[0_0_15px_#00DF81]"
-                style={{ width: `${progress}%` }}
-                transition={{ ease: "easeOut", duration: 0.1 }}
-              />
-            </div>
-
-            <div className="flex justify-between items-center text-[10px] font-mono text-white/40 tracking-wider">
-              <span>WARP ENGINE V2.4</span>
-              <span>100% HARDWARE ACCELERATED</span>
-            </div>
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#0B0F0E] border-2 border-caribbean-green/40 flex items-center justify-center shadow-[0_0_40px_rgba(0,223,129,0.3)]">
+            <span className="font-heading font-black text-4xl sm:text-5xl text-caribbean-green drop-shadow-[0_0_15px_#00DF81]">
+              A
+            </span>
           </div>
         </motion.div>
-      )}
-    </AnimatePresence>
+
+        {/* Brand Name */}
+        <div className="text-center space-y-1.5">
+          <h1 className="font-heading font-black text-3xl sm:text-4xl uppercase tracking-tight text-white">
+            ARKAF <span className="text-caribbean-green">EDGE.</span>
+          </h1>
+          <p className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] text-pistachio/70 font-semibold">
+            Strategy • Creativity • Impact
+          </p>
+        </div>
+
+        {/* Minimalist 0 to 100 Counter & Progress Bar */}
+        <div className="w-full max-w-[240px] space-y-2 pt-4">
+          <div className="flex justify-between items-center font-mono text-xs">
+            <span className="text-pistachio/60 tracking-wider uppercase text-[10px]">Loading Experience</span>
+            <span className="text-caribbean-green font-bold text-sm tracking-wider">{progress}%</span>
+          </div>
+
+          <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-caribbean-green rounded-full shadow-[0_0_10px_#00DF81]"
+              style={{ width: `${progress}%` }}
+              transition={{ ease: "easeOut", duration: 0.1 }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Classic Facebook/Meta-Style 'from ARKAF' Tag */}
+      <div className="flex flex-col items-center justify-center space-y-1">
+        <span className="font-mono text-[11px] uppercase tracking-widest text-pistachio/50">
+          from
+        </span>
+        <span className="font-heading font-black text-sm tracking-[0.35em] text-white/90 uppercase drop-shadow-[0_0_10px_rgba(0,223,129,0.3)]">
+          ARKAF
+        </span>
+      </div>
+    </motion.div>
   );
 };
