@@ -44,9 +44,9 @@ const createWarpPostShader = () => ({
     iTime: { value: 0 },
     tDiffuse: { value: null },
     uBg: { value: hexToVec3("#080d0b") },
-    uFlameA: { value: hexToVec3("#00DF81") },
-    uFlameB: { value: hexToVec3("#00B368") },
-    uFlameAmt: { value: 0.13 }
+    uFlameA: { value: hexToVec3("#59FF75") },
+    uFlameB: { value: hexToVec3("#3DFA5E") },
+    uFlameAmt: { value: 0.10 }
   },
   vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position, 1.0); }",
   fragmentShader: `
@@ -117,11 +117,11 @@ export const FlowWaveCanvas = ({ progress, className = "", style = {} }) => {
       uTime: { value: 0 },
       uStream: { value: 0 },
       uAppear: { value: 1 },
-      uColLow: { value: hexToVec3("#03100A") },
-      uColHigh: { value: hexToVec3("#00DF81") },
+      uColLow: { value: hexToVec3("#0E541E") },
+      uColHigh: { value: hexToVec3("#52FF6E") },
       uOpacity: { value: 0.90 },
       uSize: { value: 3.2 },
-      uBrightness: { value: 0.28 },
+      uBrightness: { value: 0.26 },
       uWaveHeight: { value: 3.5 },
       uFlow: { value: 1 },
       uScale: { value: 0.275 },
@@ -394,12 +394,18 @@ export const ArkafFlowImpact = () => {
               transition={{ duration: 0.8 }}
               className="max-w-3xl space-y-1.5"
             >
-              <div className="font-mono text-xs text-caribbean-green uppercase tracking-[0.3em] font-bold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-caribbean-green shadow-[0_0_10px_#00DF81]" />
+              <div
+                style={{ color: "#149C77", textShadow: "0 0 15px rgba(20, 156, 119, 0.4)" }}
+                className="font-mono text-xs uppercase tracking-[0.3em] font-bold flex items-center gap-2"
+              >
+                <span
+                  style={{ backgroundColor: "#149C77", boxShadow: "0 0 10px rgba(20, 156, 119, 0.6)" }}
+                  className="w-2 h-2 rounded-full"
+                />
                 <span>05. OUR APPROACH — FLOW</span>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase font-heading text-white tracking-tight leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
-                Think. Create. <span className="text-caribbean-green drop-shadow-[0_0_20px_rgba(0,223,129,0.35)]">Transform.</span>
+                Think. Create. <span style={{ color: "#149C77", textShadow: "0 0 25px rgba(20, 156, 119, 0.65)" }}>Transform.</span>
               </h2>
             </motion.div>
           </div>
@@ -417,7 +423,15 @@ export const ArkafFlowImpact = () => {
 
               <div className="mt-6 md:mt-8 font-sans text-sm sm:text-base md:text-xl text-pistachio font-light tracking-wide flex items-center justify-center gap-2">
                 <span>Each essential. Each in</span>
-                <span className="inline-block px-3.5 py-0.5 rounded-full border border-caribbean-green/40 text-caribbean-green font-medium text-xs sm:text-sm shadow-[0_0_15px_rgba(0,223,129,0.2)] bg-rich-black/60 backdrop-blur-md">
+                <span
+                  style={{
+                    backgroundColor: "#074239",
+                    border: "1.5px solid #149C77",
+                    color: "#FFFFFF",
+                    boxShadow: "0 0 15px rgba(20, 156, 119, 0.4)"
+                  }}
+                  className="inline-block px-3.5 py-0.5 rounded-full font-medium text-xs sm:text-sm backdrop-blur-md"
+                >
                   motion.
                 </span>
               </div>
@@ -438,11 +452,14 @@ export const ArkafFlowImpact = () => {
       {/* 07. IMPACT & NUMBERS */}
       <div className="relative z-20 py-44 px-6 md:px-20 max-w-7xl mx-auto border-t border-forest/20 bg-rich-black">
         <div className="text-center mb-24">
-          <span className="font-mono text-xs text-caribbean-green uppercase tracking-[0.3em] block mb-3 font-bold">
+          <span
+            style={{ color: "#149C77", textShadow: "0 0 15px rgba(20, 156, 119, 0.4)" }}
+            className="font-mono text-xs uppercase tracking-[0.3em] block mb-3 font-bold"
+          >
             07. IMPACT & NUMBERS
           </span>
           <h3 className="text-4xl md:text-6xl font-black uppercase font-heading text-white">
-            Measured by <span className="text-caribbean-green drop-shadow-[0_0_20px_rgba(0,223,129,0.4)]">Results.</span>
+            Measured by <span style={{ color: "#149C77", textShadow: "0 0 25px rgba(20, 156, 119, 0.65)" }}>Results.</span>
           </h3>
         </div>
 
@@ -454,9 +471,17 @@ export const ArkafFlowImpact = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="p-8 rounded-3xl bg-[#032221] border border-caribbean-green/20 text-center hover:border-caribbean-green/60 transition-colors shadow-[0_15px_35px_rgba(3,34,33,0.6)]"
+              style={{
+                backgroundColor: "#074239",
+                border: "1.5px solid rgba(20, 156, 119, 0.35)",
+                boxShadow: "0 15px 35px rgba(7, 66, 57, 0.6)"
+              }}
+              className="p-8 rounded-3xl text-center hover:border-[#149C77] transition-all"
             >
-              <div className="text-5xl md:text-7xl font-black text-caribbean-green font-heading mb-2 drop-shadow-[0_0_15px_rgba(0,223,129,0.3)]">
+              <div
+                style={{ color: "#149C77", textShadow: "0 0 20px rgba(20, 156, 119, 0.5)" }}
+                className="text-5xl md:text-7xl font-black font-heading mb-2"
+              >
                 {item.value}
               </div>
               <div className="font-mono text-xs uppercase text-pistachio/90 font-medium tracking-wider">
