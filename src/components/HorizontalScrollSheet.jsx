@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useImperativeHandle } from "react";
+import React, { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import { ImageWithFallback } from "./ImageWithFallback";
 
 const horizontalItems = [
@@ -35,6 +35,15 @@ const horizontalItems = [
 export const HorizontalScrollSheet = forwardRef((props, ref) => {
   const trackRef = useRef(null);
   const wordmarkRef = useRef(null);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.playsInline = true;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
 
   useImperativeHandle(ref, () => ({
     updateProgress: (progress) => {
@@ -52,12 +61,31 @@ export const HorizontalScrollSheet = forwardRef((props, ref) => {
   }));
 
   return (
-    <div className="relative h-screen w-full bg-[#F1F7F6] text-[#0B0F0E] overflow-hidden flex items-center select-none">
+    <div className="relative h-screen w-full bg-[#080d0b] text-[#F1F7F6] overflow-hidden flex items-center select-none">
+      {/* Background Loop Video (GPU Hardware Accelerated 0-lag) */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none will-change-transform opacity-75"
+        style={{ transform: "translate3d(0,0,0)", backfaceVisibility: "hidden" }}
+      >
+        <source src="/videos/loop2.webm" type="video/webm" />
+      </video>
+
+      {/* Dark Vignette Overlay for Readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/80 z-0 pointer-events-none" />
+
       {/* Giant Parallax Wordmark */}
       <div
         ref={wordmarkRef}
         style={{ transform: "translate3d(0%, -50%, 0)", willChange: "transform" }}
-        className="absolute top-1/2 left-0 whitespace-nowrap text-[26vw] font-black uppercase text-[#0B0F0E]/10 font-heading pointer-events-none select-none z-0"
+        className="absolute top-1/2 left-0 whitespace-nowrap text-[26vw] font-black uppercase text-white/5 font-heading pointer-events-none select-none z-0"
       >
         THE ARKAF EDGE THE ARKAF EDGE
       </div>
@@ -69,10 +97,10 @@ export const HorizontalScrollSheet = forwardRef((props, ref) => {
         className="flex gap-8 px-10 z-10"
       >
         {/* Lead Card */}
-        <div className="flex h-[64vh] w-[85vw] md:w-[520px] shrink-0 flex-col justify-center px-10 sm:px-12 bg-[#0B0F0E] text-[#F1F7F6] border border-[#0B0F0E] rounded-3xl shadow-2xl relative overflow-hidden">
+        <div className="flex h-[64vh] w-[85vw] md:w-[520px] shrink-0 flex-col justify-center px-10 sm:px-12 bg-[#0B0F0E]/90 backdrop-blur-xl text-[#F1F7F6] border border-white/15 rounded-3xl shadow-2xl relative overflow-hidden">
           <h2 className="text-4xl md:text-5xl font-black leading-none text-[#F1F7F6] font-heading uppercase mb-6 tracking-tight">
             Different thinking <br />
-            creates <span className="text-[#00DF81]">different outcomes.</span>
+            creates <span style={{ color: "#149C77", textShadow: "0 0 20px rgba(20, 156, 119, 0.5)" }}>different outcomes.</span>
           </h2>
           <p className="text-white/80 leading-relaxed text-sm md:text-base font-light font-sans">
             We look beyond conventional approaches to find the opportunities others overlook. By combining strategic insight, creative thinking, and a deep understanding of people and markets, we help brands discover their edge.

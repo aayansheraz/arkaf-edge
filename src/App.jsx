@@ -58,8 +58,8 @@ export default function App() {
         >
           {/* Scroll Progress Bar */}
           <motion.div
-            className="fixed top-0 left-0 right-0 h-[3px] bg-caribbean-green origin-left z-[100] shadow-[0_0_15px_#00DF81]"
-            style={{ scaleX }}
+            className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[100]"
+            style={{ scaleX, backgroundColor: "#149C77", boxShadow: "0 0 15px rgba(20, 156, 119, 0.6)" }}
           />
 
           <CustomCursor />
@@ -72,11 +72,19 @@ export default function App() {
           className="flex items-center gap-2 pointer-events-auto cursor-none clickable group"
           onClick={() => scrollToSection("home")}
         >
-          <div className="w-8 h-8 rounded-lg bg-caribbean-green flex items-center justify-center text-rich-black font-black text-lg shadow-[0_0_15px_rgba(0,223,129,0.4)] group-hover:scale-105 transition-transform font-heading">
+          <div
+            style={{
+              backgroundColor: "#074239",
+              border: "1.5px solid #149C77",
+              boxShadow: "0 0 15px rgba(20, 156, 119, 0.4)",
+              color: "#FFFFFF"
+            }}
+            className="w-8 h-8 rounded-lg flex items-center justify-center font-black text-lg group-hover:scale-105 transition-transform font-heading"
+          >
             A
           </div>
           <span className="text-xl md:text-2xl font-black tracking-tight uppercase font-heading text-white">
-            ARKAF <span className="text-caribbean-green">EDGE.</span>
+            ARKAF <span style={{ color: "#149C77", textShadow: "0 0 15px rgba(20, 156, 119, 0.4)" }}>EDGE.</span>
           </span>
         </motion.div>
 

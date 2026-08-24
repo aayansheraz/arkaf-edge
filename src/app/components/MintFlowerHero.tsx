@@ -22,6 +22,11 @@ export const MintFlowerHero: React.FC<{ onBack?: () => void; isStandalone?: bool
         playsInline
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-90 will-change-transform"
+        style={{
+          transform: "translate3d(0,0,0)",
+          backfaceVisibility: "hidden",
+          filter: "hue-rotate(-20deg) saturate(1.22) brightness(1.04)"
+        }}
       >
         <source src="/videos/mint_flower.webm" type="video/webm" />
         <source src="/videos/mint_flower.mp4" type="video/mp4" />
@@ -60,7 +65,7 @@ export const MintFlowerHero: React.FC<{ onBack?: () => void; isStandalone?: bool
         <div className="space-y-6 max-w-4xl">
           <h1 className="text-[12vw] sm:text-[9vw] md:text-[7.5vw] font-black uppercase font-heading tracking-tight leading-[0.88] text-anti-flash-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
             STRATEGY<br />
-            <span className="text-caribbean-green drop-shadow-[0_0_35px_rgba(0,223,129,0.6)]">CREATIVITY</span><br />
+            <span className="text-[#03624C] drop-shadow-[0_0_35px_rgba(3,98,76,0.6)]">CREATIVITY</span><br />
             IMPACT.
           </h1>
 
@@ -69,7 +74,7 @@ export const MintFlowerHero: React.FC<{ onBack?: () => void; isStandalone?: bool
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2 pointer-events-auto">
-            <button className="px-8 py-4 rounded-full bg-caribbean-green text-rich-black font-bold font-mono text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_30px_rgba(0,223,129,0.5)] flex items-center gap-2 cursor-none clickable">
+            <button className="px-8 py-4 rounded-full bg-[#03624C] hover:bg-[#047857] text-[#F1F7F6] font-bold font-mono text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_30px_rgba(3,98,76,0.6)] border border-[#0B453A] flex items-center gap-2 cursor-none clickable">
               <span>Explore Services</span>
               <ArrowRight size={14} />
             </button>

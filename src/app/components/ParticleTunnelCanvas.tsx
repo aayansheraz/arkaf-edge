@@ -57,7 +57,7 @@ export const ParticleTunnelCanvas: React.FC<{ onBack?: () => void; isStandalone?
     const uniforms = {
       uTime: { value: 0 },
       uRes: { value: new THREE.Vector2(width, height) },
-      uColor: { value: new THREE.Color("#00DF81") },
+      uColor: { value: new THREE.Color("#52FF6E") },
       uSpeed: { value: 1.0 },
     };
 

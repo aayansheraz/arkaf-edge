@@ -159,9 +159,9 @@ const createWarpPostShader = () => ({
     iTime: { value: 0 },
     tDiffuse: { value: null },
     uBg: { value: hexToVec3("#080d0b") },
-    uFlameA: { value: hexToVec3("#00DF81") },
-    uFlameB: { value: hexToVec3("#00B368") },
-    uFlameAmt: { value: 0.13 }
+    uFlameA: { value: hexToVec3("#59FF75") },
+    uFlameB: { value: hexToVec3("#3DFA5E") },
+    uFlameAmt: { value: 0.10 }
   },
   vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position, 1.0); }",
   fragmentShader: `
@@ -236,11 +236,11 @@ export const CinematicHeroStage = ({ onNavigate }) => {
     const tunnelUniforms = {
       uTime: { value: 0 },
       uAppear: { value: 0 },
-      uColLow: { value: hexToVec3("#03100A") },
-      uColHigh: { value: hexToVec3("#00DF81") },
+      uColLow: { value: hexToVec3("#0E541E") },
+      uColHigh: { value: hexToVec3("#52FF6E") },
       uOpacity: { value: 0.90 },
-      uSize: { value: 2.6 },
-      uBrightness: { value: 0.28 },
+      uSize: { value: 2.4 },
+      uBrightness: { value: 0.26 },
       uSwirl: { value: 0.39 },
       uScale: { value: 0.17 },
       uCursor: { value: new THREE.Vector3() },
@@ -282,7 +282,7 @@ export const CinematicHeroStage = ({ onNavigate }) => {
 
     const starUniforms = {
       uTime: { value: 0 },
-      uColor: { value: hexToVec3("#00DF81") },
+      uColor: { value: hexToVec3("#52FF6E") },
       uRes: { value: new THREE.Vector2(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio) }
     };
 
@@ -304,7 +304,7 @@ export const CinematicHeroStage = ({ onNavigate }) => {
     const renderPass = new RenderPass(scene, camera);
     composer.addPass(renderPass);
 
-    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.48, 0.45, 0.1);
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.40, 0.40, 0.12);
     composer.addPass(bloomPass);
 
     const warpShader = createWarpPostShader();
@@ -599,7 +599,12 @@ export const CinematicHeroStage = ({ onNavigate }) => {
           disablePictureInPicture
           disableRemotePlayback
           className="absolute inset-0 w-full h-full object-cover z-[2] pointer-events-none will-change-transform"
-          style={{ opacity: 0, transform: "translate3d(0,0,0)", backfaceVisibility: "hidden" }}
+          style={{
+            opacity: 0,
+            transform: "translate3d(0,0,0)",
+            backfaceVisibility: "hidden",
+            filter: "hue-rotate(-20deg) saturate(1.22) brightness(1.04)"
+          }}
         >
           <source src="/videos/mint_flower.mp4" type="video/mp4" />
           <source src="/videos/mint_flower.webm" type="video/webm" />
@@ -615,7 +620,7 @@ export const CinematicHeroStage = ({ onNavigate }) => {
         >
           <div className="max-w-4xl">
             <h1 className="text-[10vw] sm:text-[7vw] md:text-[6vw] font-black uppercase font-heading tracking-tighter leading-[0.9] text-anti-flash-white mb-6 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
-              Strategy • <span className="text-caribbean-green drop-shadow-[0_0_25px_rgba(0,223,129,0.5)]">Creativity</span> • Impact
+              Strategy • <span style={{ color: "#149C77", textShadow: "0 0 25px rgba(20, 156, 119, 0.65)" }} className="font-black">Creativity</span> • Impact
             </h1>
 
             <p className="text-lg md:text-2xl text-pistachio font-light max-w-2xl leading-relaxed mb-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
@@ -625,10 +630,16 @@ export const CinematicHeroStage = ({ onNavigate }) => {
             <div className="flex flex-wrap gap-4 pointer-events-auto">
               <button
                 onClick={() => onNavigate && onNavigate("services")}
-                className="px-8 py-4 rounded-full bg-caribbean-green text-rich-black font-bold text-sm uppercase tracking-widest hover:bg-anti-flash-white transition-all shadow-[0_0_30px_rgba(0,223,129,0.45)] cursor-none clickable inline-flex items-center gap-3 group"
+                style={{
+                  backgroundColor: "#074239",
+                  color: "#FFFFFF",
+                  boxShadow: "0 0 25px rgba(7, 66, 57, 0.8), 0 0 15px rgba(20, 156, 119, 0.4)",
+                  border: "1.5px solid #149C77"
+                }}
+                className="px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-[#0A564A] hover:scale-[1.02] transition-all cursor-none clickable inline-flex items-center gap-3 group"
               >
-                <span>Explore Services</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span className="text-white">Explore Services</span>
+                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
@@ -654,7 +665,7 @@ export const CinematicHeroStage = ({ onNavigate }) => {
             </div>
             <h2 className="text-4xl sm:text-6xl md:text-7xl font-black font-heading text-white tracking-tight leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               Strategy with purpose. <br />
-              <span className="text-caribbean-green drop-shadow-[0_0_30px_rgba(0,223,129,0.5)]">
+              <span style={{ color: "#149C77", textShadow: "0 0 30px rgba(20, 156, 119, 0.65)" }} className="font-black">
                 Creativity with impact.
               </span>
             </h2>
@@ -664,10 +675,11 @@ export const CinematicHeroStage = ({ onNavigate }) => {
             <div className="pt-2 pointer-events-auto">
               <button
                 onClick={() => onNavigate && onNavigate("services")}
-                className="inline-flex items-center gap-3 text-xs md:text-sm font-mono text-caribbean-green uppercase tracking-[0.2em] font-bold hover:text-white transition-colors group"
+                style={{ color: "#149C77", textShadow: "0 0 15px rgba(20, 156, 119, 0.4)" }}
+                className="inline-flex items-center gap-3 text-xs md:text-sm font-mono uppercase tracking-[0.2em] font-bold hover:text-white transition-colors group"
               >
                 <span>More About ARKAF Edge</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#149C77] group-hover:text-white group-hover:translate-x-1.5 transition-all" />
               </button>
             </div>
           </div>
@@ -685,10 +697,16 @@ export const CinematicHeroStage = ({ onNavigate }) => {
             }}
           >
             <div
-              className="font-mono text-xs text-caribbean-green font-bold tracking-[0.25em] uppercase mb-2 flex items-center gap-2"
-              style={{ justifyContent: card.side === "right" ? "flex-end" : "flex-start" }}
+              className="font-mono text-xs font-bold tracking-[0.25em] uppercase mb-2 flex items-center gap-2"
+              style={{
+                color: "#149C77",
+                justifyContent: card.side === "right" ? "flex-end" : "flex-start"
+              }}
             >
-              <span className="w-2 h-2 rounded-full bg-caribbean-green shadow-[0_0_10px_#00DF81]" />
+              <span
+                style={{ backgroundColor: "#149C77", boxShadow: "0 0 10px rgba(20, 156, 119, 0.6)" }}
+                className="w-2 h-2 rounded-full"
+              />
               <span>{card.num}</span>
             </div>
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase font-heading text-white tracking-tight leading-[1.1] mb-2 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
@@ -703,7 +721,7 @@ export const CinematicHeroStage = ({ onNavigate }) => {
         {/* 04. HORIZONTAL SCROLL SHEET */}
         <div
           ref={sheetRef}
-          className="absolute inset-0 z-30 bg-[#F1F7F6] text-[#0B0F0E] overflow-hidden shadow-[0_-25px_60px_rgba(0,0,0,0.5)] will-change-transform"
+          className="absolute inset-0 z-30 bg-[#080d0b] text-[#F1F7F6] overflow-hidden shadow-[0_-25px_60px_rgba(0,0,0,0.8)] will-change-transform"
           style={{ transform: "translate3d(0, 100%, 0)" }}
         >
           <HorizontalScrollSheet ref={sheetComponentRef} />
