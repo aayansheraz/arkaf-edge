@@ -467,45 +467,56 @@ export const ArkafFlowImpact = () => {
       </div>
 
       {/* 07. IMPACT & NUMBERS */}
-      <div className="relative z-20 py-44 px-6 md:px-20 max-w-7xl mx-auto border-t border-forest/20 bg-rich-black">
-        <div className="text-center mb-24">
-          <span
-            style={{ color: "#149C77", textShadow: "0 0 15px rgba(20, 156, 119, 0.4)" }}
-            className="font-mono text-xs uppercase tracking-[0.3em] block mb-3 font-bold"
-          >
-            07. IMPACT & NUMBERS
-          </span>
-          <h3 className="text-4xl md:text-6xl font-black uppercase font-heading text-white">
-            Measured by <span style={{ color: "#149C77", textShadow: "0 0 25px rgba(20, 156, 119, 0.65)" }}>Results.</span>
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((item, index) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              style={{
-                backgroundColor: "#074239",
-                border: "1.5px solid rgba(20, 156, 119, 0.35)",
-                boxShadow: "0 15px 35px rgba(7, 66, 57, 0.6)"
-              }}
-              className="p-8 rounded-3xl text-center hover:border-[#149C77] transition-all"
+      <div
+        style={{ backgroundColor: "#52FF6E" }}
+        className="relative z-20 w-full py-32 md:py-40 border-t border-black/10 select-none"
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-20">
+          <div className="text-center mb-20 md:mb-24">
+            <span
+              style={{ color: "#021B1A" }}
+              className="font-mono text-xs uppercase tracking-[0.3em] block mb-3 font-bold"
             >
-              <div
-                style={{ color: "#149C77", textShadow: "0 0 20px rgba(20, 156, 119, 0.5)" }}
-                className="text-5xl md:text-7xl font-black font-heading mb-2"
+              07. IMPACT & NUMBERS
+            </span>
+            <h3
+              style={{ color: "#021B1A" }}
+              className="text-4xl md:text-6xl font-black uppercase font-heading"
+            >
+              Measured by <span style={{ color: "#074239" }}>Results.</span>
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                style={{
+                  backgroundColor: "#074239",
+                  border: "1.5px solid rgba(255, 255, 255, 0.15)",
+                  boxShadow: "0 20px 45px rgba(2, 27, 26, 0.25)"
+                }}
+                className="p-8 rounded-3xl text-center hover:scale-[1.02] transition-transform duration-300"
               >
-                {item.value}
-              </div>
-              <div className="font-mono text-xs uppercase text-pistachio/90 font-medium tracking-wider">
-                {item.label}
-              </div>
-            </motion.div>
-          ))}
+                <div
+                  style={{ color: "#FFFFFF", textShadow: "0 2px 10px rgba(0, 0, 0, 0.5)" }}
+                  className="text-5xl md:text-7xl font-black font-heading mb-2"
+                >
+                  {item.value}
+                </div>
+                <div
+                  style={{ color: "#FFFFFF" }}
+                  className="font-mono text-xs uppercase font-medium tracking-wider"
+                >
+                  {item.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
