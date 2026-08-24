@@ -469,10 +469,10 @@ export const ArkafFlowImpact = () => {
       {/* 07. IMPACT & NUMBERS */}
       <div
         style={{ backgroundColor: "#52FF6E" }}
-        className="relative z-20 w-full py-32 md:py-40 border-t border-black/10 select-none"
+        className="relative z-20 w-full py-44 border-t border-black/10 select-none"
       >
         <div className="max-w-7xl mx-auto px-6 md:px-20">
-          <div className="text-center mb-20 md:mb-24">
+          <div className="text-center mb-24">
             <span
               style={{ color: "#021B1A" }}
               className="font-mono text-xs uppercase tracking-[0.3em] block mb-3 font-bold"
@@ -480,10 +480,10 @@ export const ArkafFlowImpact = () => {
               07. IMPACT & NUMBERS
             </span>
             <h3
-              style={{ color: "#021B1A" }}
+              style={{ color: "#FFFFFF", textShadow: "0 2px 12px rgba(0, 0, 0, 0.4)" }}
               className="text-4xl md:text-6xl font-black uppercase font-heading"
             >
-              Measured by <span style={{ color: "#074239" }}>Results.</span>
+              Measured by <span style={{ color: "#074239", textShadow: "none" }}>Results.</span>
             </h3>
           </div>
 
