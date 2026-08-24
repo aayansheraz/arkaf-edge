@@ -111,7 +111,7 @@ export const HorizontalScrollSheet = forwardRef((props, ref) => {
         {horizontalItems.map((item) => (
           <div
             key={item.id}
-            className="group relative h-[64vh] w-[85vw] md:w-[460px] shrink-0 overflow-hidden bg-[#0B0F0E] border border-[#E2E8E6] hover:border-[#00DF81] rounded-3xl transition-all duration-500 shadow-xl"
+            className="group relative h-[64vh] w-[85vw] md:w-[460px] shrink-0 overflow-hidden bg-[#0B0F0E] border border-[#E2E8E6]/20 hover:border-[#149C77] rounded-3xl transition-all duration-500 shadow-xl"
           >
             {/* Nature Photo Background */}
             <ImageWithFallback
@@ -123,21 +123,32 @@ export const HorizontalScrollSheet = forwardRef((props, ref) => {
             {/* Bottom-Anchored Typography & Gradient */}
             <div className="absolute inset-x-0 bottom-0 z-10 p-8 sm:p-10 bg-gradient-to-t from-[#0B0F0E]/95 via-[#0B0F0E]/55 to-transparent flex flex-col justify-end text-left transition-all duration-300">
               <div className="space-y-2">
-                <span className="inline-block px-3 py-1 rounded-full bg-[#00DF81] text-[#0B0F0E] font-mono text-[10px] uppercase font-bold tracking-widest mb-1 shadow-[0_0_15px_rgba(0,223,129,0.3)]">
+                <span
+                  style={{
+                    backgroundColor: "#074239",
+                    border: "1.5px solid #149C77",
+                    color: "#FFFFFF",
+                    boxShadow: "0 0 15px rgba(20, 156, 119, 0.4)"
+                  }}
+                  className="inline-block px-3 py-1 rounded-full font-mono text-[10px] uppercase font-bold tracking-widest mb-1"
+                >
                   {item.tag}
                 </span>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase text-[#F1F7F6] font-heading leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
                   {item.title}
                 </h3>
-                <p className="font-mono text-xs uppercase tracking-widest text-[#00DF81] font-semibold drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
+                <p
+                  style={{ color: "#149C77", textShadow: "0 0 15px rgba(20, 156, 119, 0.4)" }}
+                  className="font-mono text-xs uppercase tracking-widest font-semibold drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]"
+                >
                   {item.subtitle}
                 </p>
               </div>
             </div>
 
             {/* Top-Left Step Index */}
-            <div className="absolute top-6 left-6 z-20 px-3.5 py-1 rounded-full bg-[#0B0F0E]/90 backdrop-blur-md border border-white/20">
-              <span className="font-mono text-xs text-[#00DF81] font-bold">
+            <div className="absolute top-6 left-6 z-20 px-3.5 py-1 rounded-full bg-[#0B0F0E]/90 backdrop-blur-md border border-[#149C77]/40">
+              <span style={{ color: "#149C77" }} className="font-mono text-xs font-bold">
                 0{item.id}
               </span>
             </div>
