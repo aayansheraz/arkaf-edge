@@ -322,16 +322,22 @@ const stats = [
 ];
 
 const WordTransition = ({ word, index, scrollYProgress }) => {
-  const ranges = [[0, 0.3], [0.3, 0.65], [0.65, 0.95]][index] || [0, 0.33];
-  const mid = (ranges[0] + ranges[1]) / 2;
+  let inputDomain = [0.0, 0.28, 0.35, 1.0];
+  let opacityRange = [1.0, 1.0, 0.2, 0.2];
+  let scaleRange = [1.06, 1.06, 0.95, 0.95];
 
-  const opacity = useTransform(
-    scrollYProgress,
-    [Math.max(0, ranges[0] - 0.05), ranges[0], ranges[1], Math.min(1, ranges[1] + 0.05)],
-    [0.2, 1, 1, 0.2]
-  );
+  if (index === 1) {
+    inputDomain = [0.0, 0.28, 0.35, 0.62, 0.68, 1.0];
+    opacityRange = [0.2, 0.2, 1.0, 1.0, 0.2, 0.2];
+    scaleRange = [0.95, 0.95, 1.06, 1.06, 0.95, 0.95];
+  } else if (index === 2) {
+    inputDomain = [0.0, 0.62, 0.68, 1.0];
+    opacityRange = [0.2, 0.2, 1.0, 1.0];
+    scaleRange = [0.95, 0.95, 1.06, 1.06];
+  }
 
-  const scale = useTransform(scrollYProgress, [ranges[0], mid, ranges[1]], [0.96, 1.06, 0.96]);
+  const opacity = useTransform(scrollYProgress, inputDomain, opacityRange);
+  const scale = useTransform(scrollYProgress, inputDomain, scaleRange);
 
   return (
     <motion.h2
@@ -344,11 +350,22 @@ const WordTransition = ({ word, index, scrollYProgress }) => {
 };
 
 const StepPreviewCard = ({ step, index, scrollYProgress }) => {
-  const ranges = [[0.02, 0.25, 0.32], [0.33, 0.58, 0.65], [0.66, 0.9, 0.96]];
-  const [start, active, end] = ranges[index] || [0, 0.3, 0.35];
+  let inputDomain = [0.0, 0.26, 0.34, 1.0];
+  let opacityRange = [1.0, 1.0, 0.0, 0.0];
+  let yRange = [0, 0, -40, -40];
 
-  const y = useTransform(scrollYProgress, [Math.max(0, start - 0.06), start, active, end], [100, 0, 0, -60]);
-  const opacity = useTransform(scrollYProgress, [Math.max(0, start - 0.05), start, active, end], [0, 1, 1, 0]);
+  if (index === 1) {
+    inputDomain = [0.0, 0.28, 0.35, 0.60, 0.67, 1.0];
+    opacityRange = [0.0, 0.0, 1.0, 1.0, 0.0, 0.0];
+    yRange = [40, 40, 0, 0, -40, -40];
+  } else if (index === 2) {
+    inputDomain = [0.0, 0.61, 0.68, 1.0];
+    opacityRange = [0.0, 0.0, 1.0, 1.0];
+    yRange = [40, 40, 0, 0];
+  }
+
+  const y = useTransform(scrollYProgress, inputDomain, yRange);
+  const opacity = useTransform(scrollYProgress, inputDomain, opacityRange);
   const isLeft = step.side === "left";
 
   return (
